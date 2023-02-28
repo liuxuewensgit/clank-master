@@ -1,0 +1,17 @@
+kind: grpc
+port: 9123
+importPath:
+  - /Users/lxw/go/src/go.planetmeican.com/kiwi/generator-proto/v1/
+protoPath:
+  - generator-v1.proto
+servers:
+  - name: generator.v1.GenerateService
+    methods:
+      - name: GenerateV1
+        defaultResponse: '{"ids":{{RandInt64Slice 10}}}'
+
+#  grpcurl -plaintext \
+#  -import-path $GOPATH/src \
+#  -import-path . \
+#  -proto generator-v1.proto \
+#  127.0.0.1:9123 generator.v1.GenerateService/GenerateV1

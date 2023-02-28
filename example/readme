@@ -1,0 +1,77 @@
+
+## mock grpc
+clank --yaml grpc_serv.yaml
+
+
+### grpcurl test
+#### normal
+```
+grpcurl -plaintext \
+-import-path $GOPATH/src \
+-import-path ../internal/testdata/ \
+-d '{
+  "id": 1
+}' \
+-proto protos/api/student_api.proto \
+127.0.0.1:54312 api.StudentSrv/StudentByID
+```
+#### header
+```
+grpcurl -plaintext \
+-import-path $GOPATH/src \
+-import-path ../internal/testdata/ \
+-H 'x-header: test' \
+-d '{
+  "id": 1
+}' \
+-proto protos/api/student_api.proto \
+127.0.0.1:54312 api.StudentSrv/StudentByID
+```
+
+```
+grpcurl -plaintext \
+-import-path $GOPATH/src \
+-import-path ../internal/testdata/ \
+-d '{
+  "id": 111
+}' \
+-proto protos/api/student_api.proto \
+127.0.0.1:54312 api.StudentSrv/StudentByID
+```
+
+```
+grpcurl -plaintext \
+-import-path $GOPATH/src \
+-import-path ../internal/testdata/ \
+-d '{
+  "id": 456
+}' \
+-proto protos/api/student_api.proto \
+127.0.0.1:54312 api.StudentSrv/StudentByID
+```
+
+```
+grpcurl -plaintext \
+-import-path $GOPATH/src \
+-import-path ../internal/testdata/ \
+-d '{
+  "id": 1,
+  "name":"test"
+}' \
+-proto protos/api/student_api.proto \
+127.0.0.1:54312 api.StudentSrv/NewStudent
+
+```
+internal/testdata/protos/api/student_api.proto
+
+## mock http
+
+
+```
+curl --request POST 'http://localhost:9527/user/1/order/no123abc' \
+--header 'Content-Type: application/json' \
+--data '{
+  "id": 1,
+  "name":"test"
+}'
+```
